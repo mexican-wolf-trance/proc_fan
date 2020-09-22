@@ -18,8 +18,10 @@ int main (int argc, char *argv[])
 		fprint(stderr, "Not enough arguments for %s\n", argv[0]);
 		return 1;
 	}
+	
+	pr_limit = commandLineParse(argc, argv);
 
-	pr_limit = atoi(argv[1]);
+	#pr_limit = atoi(argv[1]);
 
 	if (pr_limit < 0)
 	{
