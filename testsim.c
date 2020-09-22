@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main(nt argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	int n, sec;
 	if (argc <= 2)

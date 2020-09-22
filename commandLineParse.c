@@ -1,7 +1,7 @@
 #include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd>
+#include <unistd.h>
 
 int commandLineParse(int argc, char *argv[])
 {
@@ -21,7 +21,7 @@ int commandLineParse(int argc, char *argv[])
 			*proc_limit = atoi(optarg);
 			break;
 		default:
-			perror("Requires -n argument: max number of concurrent children\n")
+			perror("Requires -n argument: max number of concurrent children\n");
 			return 1;
 	}
 

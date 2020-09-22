@@ -5,7 +5,7 @@
 
 int argFormat(const char *source, const char *delimiters, char ***newArg)
 {
-	int i, error, numtokens;
+	int i, error, num_tokens;
 	char *buff;
 	const char *snew;
 	
@@ -31,7 +31,7 @@ int argFormat(const char *source, const char *delimiters, char ***newArg)
 
 	num_tokens = 0;
 	if(strtok(buff, delimiters) != NULL)
-		for(num_tokens = 1; strok(NULL, delimiters) !+ NULL; num_tokens++);
+		for(num_tokens = 1; strtok(NULL, delimiters) != NULL; num_tokens++);
 
 	if ((*newArg = malloc((num_tokens + 1) * sizeof(char *))) == NULL)
 	{
@@ -53,7 +53,7 @@ int argFormat(const char *source, const char *delimiters, char ***newArg)
 	}
 
 	*((*newArg) + num_tokens) = NULL;
-	printf("Token number thingy: %d" num_tokens);
+	printf("Token number thingy: %d", num_tokens);
 
 	return num_tokens;
 }

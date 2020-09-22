@@ -15,18 +15,18 @@ int main (int argc, char *argv[])
 
 	if (argc < 2)
 	{
-		fprint(stderr, "Not enough arguments for %s\n", argv[0]);
+		fprintf(stderr, "Not enough arguments for %s\n", argv[0]);
 		return 1;
 	}
 	
 	pr_limit = commandLineParse(argc, argv);
 
-	#pr_limit = atoi(argv[1]);
+	/*pr_limit = atoi(argv[1]);*/
 
 	if (pr_limit < 0)
 	{
-		fprintf(stderr, "Too few iterations (must be greater than 0)")
-		return 1
+		fprintf(stderr, "Too few iterations (must be greater than 0)");
+		return 1;
 	}
 
 	while(fgets(executable, MAX - 1, stdin) != NULL)
@@ -50,14 +50,14 @@ int main (int argc, char *argv[])
 
 		if (child == 0)
 		{
-			if (argFormat(executable, delimiter, &execArg) == -1)
-				perror("Child failed\n")
+			if (argFormat(executable, delimiters, &execArg) == -1)
+				perror("Child failed\n");
 			else
 			{
 				execvp(execArg[0], &execArg[0]);
-				perror("Child failed to execvp")
+				perror("Child failed to execvp");
 			}
-			retrun 1;
+			return 1;
 		}
 	
 		if (waitpid(-1, NULL, WNOHANG) != 0)
