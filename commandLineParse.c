@@ -14,16 +14,20 @@ int commandLineParse(int argc, char *argv[])
 	}
 
 	int option;
-	while ((option = getopt(argc, argv, "n:")) != -1)
+	while ((option = getopt(argc, argv, "n:h")) != -1)
 	switch (option)
 	{
+		case 'h':
+			printf("You typed h! Amazing\n");
+			exit(2);
 		case 'n':
 			*proc_limit = atoi(optarg);
+			printf("proc_limit %d\n", *proc_limit);
 			break;
 		default:
 			perror("Requires -n argument: max number of concurrent children\n");
 			return 1;
 	}
 
-	return proc_limit;
+	return *proc_limit;
 }

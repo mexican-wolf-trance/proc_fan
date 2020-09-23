@@ -49,11 +49,10 @@ int argFormat(const char *source, const char *delimiters, char ***newArg)
 
 		**newArg = strtok(buff, delimiters);
 		for (i = 1; i < num_tokens; i++)
-			*((newArg) + i) = strtok(NULL, delimiters);
+			*((*newArg) + i) = strtok(NULL, delimiters);
 	}
 
 	*((*newArg) + num_tokens) = NULL;
-	printf("Token number thingy: %d", num_tokens);
 
 	return num_tokens;
 }
