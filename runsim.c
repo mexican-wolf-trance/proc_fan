@@ -7,10 +7,12 @@
 
 #define MAX 1024
 
+char** get_exec_argv(char* str);
+
 int main (int argc, char *argv[])
 {
 	pid_t child = 0;
-	char **execArg, delimiters[] = " \t\n", executable[MAX];
+	char **execArg, delimiters[] = " \t\n", executable[MAX], **exec_argv;
 	int pr_limit = 0, pr_count = 0, total_count = 0;
 
 	if (argc < 2)
@@ -38,20 +40,34 @@ int main (int argc, char *argv[])
 
 		pr_count++;
 		total_count++;
-
-		if ((child = fork()) == 0)
+	
+		child = fork();
+		if (child == 0)
 		{
-			if (argFormat(executable, delimiters, &execArg) == -1)
+			strtok(executable, "\n");
+
+            		exec_argv = get_exec_argv(executable);
+			
+			printf("exec_argv[0]: %s\n", exec_argv[0]);
+			printf("exec_argv[1]: %s\n", exec_argv[1]);
+			printf("exec_argv[2]: %s\n", exec_argv[2]);
+
+            		execvp(exec_argv[0], exec_argv);
+            
+            		perror("Child failed to execvp the command");
+            		return 1;
+			/*if (argFormat(executable, delimiters, &execArg) == -1)
 				perror("Child failed\n");
 			else
 			{
+				printf("execArg: %s\n", *execArg);
 				execvp(execArg[0], &execArg[0]);
 				perror("Child failed to execvp");
 			}
-			return 1;
+			return 1;*/
 		}
 
-		if(child < 0)
+		if (child < 0)
                 {
                         perror("Failed tp fork");
                         return 1;
@@ -74,4 +90,22 @@ int main (int argc, char *argv[])
 
 	printf("The total count is: %d\n", total_count);
 	return 0;
+}
+
+char** get_exec_argv(char* str) 
+{
+    	char* substr;
+    	char** exec_argv = malloc(10 * sizeof(char));
+    	substr = strtok(str, " ");
+    	int i = 0;
+    	while (substr != NULL)
+    	{
+    		exec_argv[i] = malloc(20 * sizeof(char));
+   		exec_argv[i] = substr;
+		
+    		substr = strtok(NULL, " ");
+  		i++;
+    	}
+   	exec_argv[i] = NULL;
+    	return exec_argv;
 }

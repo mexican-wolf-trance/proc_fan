@@ -43,6 +43,9 @@ int argFormat(const char *source, const char *delimiters, char ***newArg)
 		return -1;
 	}
 
+	if (num_tokens == 0)
+		free(buff);
+
 	else
 	{
 		strcpy(buff, snew);
@@ -53,6 +56,7 @@ int argFormat(const char *source, const char *delimiters, char ***newArg)
 	}
 
 	*((*newArg) + num_tokens) = NULL;
+	printf("newArg: %s, other newarg: %d\n", **newArg, ***newArg);
 
 	return num_tokens;
 }
