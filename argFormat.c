@@ -27,7 +27,6 @@ int argFormat(const char *source, const char *delimiters, char ***newArg)
 	}
 
 	strcpy(buff, snew);
-	printf("The buff is %s", buff);
 
 	num_tokens = 0;
 	if(strtok(buff, delimiters) != NULL)
@@ -56,7 +55,6 @@ int argFormat(const char *source, const char *delimiters, char ***newArg)
 	}
 
 	*((*newArg) + num_tokens) = NULL;
-	printf("newArg: %s, other newarg: %d\n", **newArg, ***newArg);
 
 	return num_tokens;
 }

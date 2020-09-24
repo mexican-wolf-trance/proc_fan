@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -g -std=gnu99
-TARGET = runsim
+TARGET = proc_fan
 TARGET2 = testsim
 OBJ1 = runsim.o argFormat.o commandLineParse.o
 OBJ2 = testsim.o
